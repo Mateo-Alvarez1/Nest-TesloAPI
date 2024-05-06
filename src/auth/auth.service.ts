@@ -30,6 +30,7 @@ export class AuthService {
       });
 
       await this.userRepository.save(user);
+
       return {
         ...user,
         token: this.jwtToken({ id: user.id }),
@@ -55,6 +56,13 @@ export class AuthService {
       throw new BadRequestException('Credentials are not valid (password)');
     }
 
+    return {
+      ...user,
+      token: this.jwtToken({ id: user.id }),
+    };
+  }
+
+  async checkAuthStatus(user: User) {
     return {
       ...user,
       token: this.jwtToken({ id: user.id }),

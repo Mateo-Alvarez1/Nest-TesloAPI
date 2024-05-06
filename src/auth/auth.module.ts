@@ -4,7 +4,7 @@ import { AuthController } from './auth.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entities/User.entity';
 import { PassportModule } from '@nestjs/passport';
-import { JwtModule, JwtService } from '@nestjs/jwt';
+import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtStratgy } from './strategies/Jwt.strategy';
 @Module({
@@ -21,7 +21,6 @@ import { JwtStratgy } from './strategies/Jwt.strategy';
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => {
         return {
-          //HACERLO CON CONFIGMODULE
           secret: configService.get('JWT_SECRET'),
           signOptions: { expiresIn: '2h' },
         };
